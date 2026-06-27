@@ -40,7 +40,7 @@ export default async function handler(req, res) {
 4. 응답 마지막에 반드시 "AI 상담 전략은 참고용입니다. 최종 판단과 실제 상담은 교사가 학생의 상황을 종합적으로 고려하여 진행해야 합니다."라는 안내 문구를 포함하세요.`;
 
   try {
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent?key=${apiKey}`;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent?key=${apiKey}`;
     const response = await fetch(url, {
       method: "POST",
       headers: {
