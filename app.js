@@ -249,8 +249,8 @@ function selectCounselingStudent(studentId) {
   // 1. 프론트엔드에 API 키를 넣으면 개발자 도구에서 노출될 수 있다.
   // 2. Gemini API 호출은 Vercel Serverless Function에서 처리한다.
   // 5. Gemini로 전송하는 데이터는 이름, 학번, 사진 경로를 제외한 최소 정보로 제한한다.
-  const alias = \`학생 \${selectedCounselingStudent.id.slice(-2)}\`;
-  const gradeSummary = Object.entries(selectedCounselingStudent.grades).map(([k,v]) => \`\${k}: \${v}\`).join(", ");
+  const alias = `학생 ${selectedCounselingStudent.id.slice(-2)}`;
+  const gradeSummary = Object.entries(selectedCounselingStudent.grades).map(([k,v]) => `${k}: ${v}`).join(", ");
   const learningTraits = selectedCounselingStudent.traits.join(" ") + " " + selectedCounselingStudent.teacherMemo;
 
   const previewObj = {
@@ -260,13 +260,13 @@ function selectCounselingStudent(studentId) {
     teacherConcern: ""
   };
 
-  contentDiv.innerHTML = \`
+  contentDiv.innerHTML = `
     <div class="counseling-layout">
       <div class="counseling-left">
         <h3 class="panel-subtitle">선택된 학생 (화면용 정보)</h3>
         <div class="selected-student-info">
-          <strong>이름:</strong> \${selectedCounselingStudent.name} &nbsp;|&nbsp; 
-          <strong>학번:</strong> \${selectedCounselingStudent.id}
+          <strong>이름:</strong> ${selectedCounselingStudent.name} &nbsp;|&nbsp; 
+          <strong>학번:</strong> ${selectedCounselingStudent.id}
         </div>
         
         <h3 class="panel-subtitle" style="margin-top: 20px;">교사 고민 입력</h3>
@@ -278,7 +278,7 @@ function selectCounselingStudent(studentId) {
       
       <div class="counseling-right">
         <h3 class="panel-subtitle">전송 데이터 미리보기 (익명화)</h3>
-        <pre id="previewData" class="data-preview">\${JSON.stringify(previewObj, null, 2)}</pre>
+        <pre id="previewData" class="data-preview">${JSON.stringify(previewObj, null, 2)}</pre>
       </div>
     </div>
     
@@ -287,7 +287,7 @@ function selectCounselingStudent(studentId) {
     <p class="counseling-notice">
       AI 상담 전략은 참고용입니다. 최종 판단과 실제 상담은 교사가 학생의 상황을 종합적으로 고려하여 진행해야 합니다.
     </p>
-  \`;
+  `;
 
   const textarea = document.querySelector("#teacherConcernInput");
   textarea.addEventListener("input", (e) => {
@@ -311,8 +311,8 @@ async function requestStrategy() {
     return;
   }
 
-  const alias = \`학생 \${selectedCounselingStudent.id.slice(-2)}\`;
-  const gradeSummary = Object.entries(selectedCounselingStudent.grades).map(([k,v]) => \`\${k}: \${v}\`).join(", ");
+  const alias = `학생 ${selectedCounselingStudent.id.slice(-2)}`;
+  const gradeSummary = Object.entries(selectedCounselingStudent.grades).map(([k,v]) => `${k}: ${v}`).join(", ");
   const learningTraits = selectedCounselingStudent.traits.join(" ") + " " + selectedCounselingStudent.teacherMemo;
 
   const payload = {
@@ -343,8 +343,8 @@ async function requestStrategy() {
     messageEl.textContent = "AI 상담 전략 생성이 완료되었습니다.";
     messageEl.style.color = "var(--primary-dark)";
     
-    resultEl.innerHTML = \`<h3 class="panel-subtitle">✨ AI 상담 전략 결과</h3>
-      <div class="result-content">\${formatResult(data.result)}</div>\`;
+    resultEl.innerHTML = `<h3 class="panel-subtitle">✨ AI 상담 전략 결과</h3>
+      <div class="result-content">${formatResult(data.result)}</div>`;
     resultEl.classList.remove("hidden");
 
   } catch (error) {
@@ -359,7 +359,7 @@ async function requestStrategy() {
 function formatResult(text) {
   return text.split('\\n').map(line => {
     if (line.trim() === '') return '<br>';
-    return \`<p>\${line.replace(/\\*\\*(.*?)\\*\\*/g, '<strong>$1</strong>')}</p>\`;
+    return `<p>${line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</p>`;
   }).join('');
 }
 
